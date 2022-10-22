@@ -1,0 +1,56 @@
+version: '3'
+services:
+  php-fpm:
+    build: php-fpm
+    container_name: php-fpm
+    hostname: php-fpm
+    volumes:
+      - ./website/bedrock:/var/www/html
+    ports:
+      - "9000:9000"
+    expose:
+      - 9000
+    links:
+      - bedrock-db
+    depends_on:
+      - bedrock-db
+    networks:
+      - app-network
+
+  nginx:
+    build: nginx
+    volumes:
+      - ./website/bedrock:/var/www/html/
+      - ./Logs/nginx:/var/log/nginx
+    ports:
+      - "8080:80"
+    depends_on:
+      - php-fpm
+    links:
+      - php-fpm
+    networks:
+      - app-network
+
+  bedrock-db:
+    image: bedrock-bedrock-db:latest
+    container_name: bedrock-db
+    platform: linux/x86_64
+    restart: always
+    ports:
+      - "3306:3306"
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: bedrock
+      MYSQL_USER: admin
+      MYSQL_PASSWORD: 1234
+    volumes:
+      - db-volume:/var/lib/mysql
+    networks:
+      - app-network
+
+volumes:
+  db-volume:
+
+networks:
+  app-network:
+    driver: bridge

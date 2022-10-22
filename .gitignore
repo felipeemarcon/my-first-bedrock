@@ -1,0 +1,32 @@
+# Application
+website/bedrock/web/app/plugins/*
+!website/bedrock/web/app/plugins/.gitkeep
+website/bedrock/web/app/mu-plugins/*/
+website/bedrock/web/app/themes/twentytwentytwo/
+website/bedrock/web/app/upgrade
+website/bedrock/web/app/uploads/*
+website/bedrock/!web/app/uploads/.gitkeep
+website/bedrock/web/app/cache/*
+
+# WordPress
+website/bedrock/web/wp
+website/bedrock/web/.htaccess
+
+# Logs
+*.log
+Logs
+
+# Dotenv
+.env
+.env.*
+!.env.example
+
+# Composer
+/vendor
+
+# WP-CLI
+wp-cli.local.yml
+
+.docker/*
+vendor
+node_modules
