@@ -14,7 +14,7 @@ website/bedrock/web/.htaccess
 
 # Logs
 *.log
-Logs
+logs
 
 # Dotenv
 .env
